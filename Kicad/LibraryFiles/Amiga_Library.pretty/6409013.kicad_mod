@@ -1,0 +1,216 @@
+(footprint "6409013"
+	(version 20260206)
+	(generator "pcbnew")
+	(generator_version "10.0")
+	(layer "F.Cu")
+	(descr "640901-3-2")
+	(tags "Connector")
+	(property "Reference" "J**"
+		(at 12.7 0 0)
+		(layer "F.SilkS")
+		(uuid "63e408d2-65e9-46d9-b464-0945979e535b")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Value" "6409013"
+		(at 12.7 0 0)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "f273d703-f77d-489a-8821-21ae25d5d061")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.254)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3ffc9ac5-ff7a-4761-a618-f4d51e92db27")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "da35abcb-5419-4b3b-9236-ff7289740d54")
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+	)
+	(attr through_hole exclude_from_pos_files)
+	(duplicate_pad_numbers_are_jumpers no)
+	(fp_line
+		(start -3.81 -3.81)
+		(end 29.21 -3.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "4b03da12-f52a-45f0-8434-5994eb67a8ae")
+	)
+	(fp_line
+		(start -3.81 3.81)
+		(end -3.81 -3.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "fdae351c-6adb-4692-9b41-f88fd90521a9")
+	)
+	(fp_line
+		(start 29.21 -3.81)
+		(end 29.21 3.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "5696ec5a-7fb3-40fe-bac3-3c12276fb409")
+	)
+	(fp_line
+		(start 29.21 3.81)
+		(end -3.81 3.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "a21b9b59-4369-4c9b-b969-b536a0e79ed8")
+	)
+	(fp_line
+		(start -4.81 -4.81)
+		(end 30.21 -4.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "eb5af029-4750-4148-a919-19a200fba746")
+	)
+	(fp_line
+		(start -4.81 4.81)
+		(end -4.81 -4.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "03f8c992-fd1e-48f3-b443-cfd06a348fcb")
+	)
+	(fp_line
+		(start -3.81 -3.81)
+		(end 29.21 -3.81)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "aad529e4-2d0c-481e-b6ce-69931016de75")
+	)
+	(fp_line
+		(start -3.81 3.81)
+		(end -3.81 -3.81)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "a7ddbfae-0dbb-4da3-89bb-a3eeed8bf331")
+	)
+	(fp_line
+		(start 29.21 -3.81)
+		(end 29.21 3.81)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "f019acb1-6488-4f01-a3f9-f81271d9f4b3")
+	)
+	(fp_line
+		(start 29.21 3.81)
+		(end -3.81 3.81)
+		(stroke
+			(width 0.2)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "a5a845b8-2412-420d-9d09-eb6ed2c5598c")
+	)
+	(fp_line
+		(start 30.21 -4.81)
+		(end 30.21 4.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "db665e5b-0b75-40d2-af72-f14d24d12462")
+	)
+	(fp_line
+		(start 30.21 4.81)
+		(end -4.81 4.81)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "b22950b2-0a0c-4d47-9b8e-253450120aa4")
+	)
+	(pad "1" thru_hole circle
+		(at 0 0 90)
+		(size 2.79 2.79)
+		(drill 1.86)
+		(layers "*.Cu" "*.Mask" "F.SilkS")
+		(remove_unused_layers no)
+		(uuid "4be92e7d-3b09-4e2b-afdd-617a656ad651")
+	)
+	(pad "2" thru_hole circle
+		(at 6.35 0 90)
+		(size 2.79 2.79)
+		(drill 1.86)
+		(layers "*.Cu" "*.Mask" "F.SilkS")
+		(remove_unused_layers no)
+		(uuid "7f9ce614-340c-4cdb-9f3c-a794fe196d98")
+	)
+	(pad "3" thru_hole circle
+		(at 12.7 0 90)
+		(size 2.79 2.79)
+		(drill 1.86)
+		(layers "*.Cu" "*.Mask" "F.SilkS")
+		(remove_unused_layers no)
+		(uuid "b9ad7b3b-1723-4c73-8829-f8a67671ea55")
+	)
+	(pad "4" thru_hole circle
+		(at 19.05 0 90)
+		(size 2.79 2.79)
+		(drill 1.86)
+		(layers "*.Cu" "*.Mask" "F.SilkS")
+		(remove_unused_layers no)
+		(uuid "e341c88c-337b-455a-9319-da7a89f63efe")
+	)
+	(pad "5" thru_hole circle
+		(at 25.4 0 90)
+		(size 2.79 2.79)
+		(drill 1.86)
+		(layers "*.Cu" "*.Mask" "F.SilkS")
+		(remove_unused_layers no)
+		(uuid "85d7be6d-f1d1-4890-b26a-00a002a077f4")
+	)
+	(embedded_fonts no)
+)

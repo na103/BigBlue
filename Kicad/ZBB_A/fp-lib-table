@@ -1,0 +1,4 @@
+(fp_lib_table
+	(version 7)
+	(lib (name "Amiga_Library") (type "KiCad") (uri "C:/Users/n.avanzi/Desktop/ZBB/Kicad/LibraryFiles/Amiga_Library.pretty") (options "") (descr ""))
+)
