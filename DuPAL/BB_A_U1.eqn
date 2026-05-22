@@ -1,0 +1,23 @@
+# PAL16L8
+# Padding FIOs START
+# Padding END
+
+o12 = (i6&i9&i11) | (!i8) | (!i4) | (!i7);
+o12oe = ;
+
+io17oe = (i2&!i3&!io18&!io13) | 
+         (i2&!i3&!i5&!io13) | 
+		 (i2&!i3&!io18&!io16) | 
+		 (i2&!i3&!i5&!io16) | 
+		 (!i2&!i7&!io18) | 
+		 (!i2&!i5&!i7);
+io17 = ;
+
+io15 = (!i11) | (!i9);
+io15oe = ;
+
+io14 = ();
+io14oe = (!io18) | (!i5);
+
+o19 = (!i2&!i11) | (!i2&!i9) | (!i1&i2);
+o19oe = ;

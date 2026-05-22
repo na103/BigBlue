@@ -1,0 +1,38 @@
+# PAL16L8
+# Padding FIOs START
+# Padding END
+
+o19 = (i2&i3&i4&i5&i6&i9&i11&io14&!io13) | (i2&i3&i4&i5&i7&i9&i11&io14
+    &!io13) | (i2&i3&i4&i6&i7&i9&i11&io14&!io13) | (i2&i3&i5&i6&i7&i9&i11
+    &io14&!io13) | (i2&i3&i4&i5&i6&i9&i11&!io14&io13) | (i2&i3&i4&i5&i7
+    &i9&i11&!io14&io13) | (i2&i3&i4&i6&i7&i9&i11&!io14&io13) | (i2&i3&i5
+    &i6&i7&i9&i11&!io14&io13) | (i2&i3&i4&i5&i6&i8&!i9&!i11) | (i2&i3&i4
+    &i5&i7&i8&!i9&!i11) | (i2&i3&i4&i6&i7&i8&!i9&!i11) | (i2&i3&i5&i6&i7
+    &i8&!i9&!i11) | (i3&i4&i5&i6&i7&i9&i11&io14&!io13) | (i2&i4&i5&i6&i7
+    &i9&i11&io14&!io13) | (i3&i4&i5&i6&i7&i9&i11&!io14&io13) | (i2&i4&i5
+    &i6&i7&i9&i11&!io14&io13) | (i3&i4&i5&i6&i7&i8&!i9&!i11) | (i2&i4&i5
+    &i6&i7&i8&!i9&!i11) | (i2&i3&i4&i5&i6&!i8&i9) | (i2&i3&i4&i5&i7&!i8
+    &i9) | (i2&i3&i4&i6&i7&!i8&i9) | (i2&i3&i5&i6&i7&!i8&i9) | (i2&i3&i4
+    &i5&i6&!i8&i11) | (i2&i3&i4&i5&i7&!i8&i11) | (i2&i3&i4&i6&i7&!i8&i11) | (
+    i2&i3&i5&i6&i7&!i8&i11) | (i2&i3&i4&i5&i6&!io15) | (i2&i3&i4&i5&i7
+    &!io15) | (i2&i3&i4&i6&i7&!io15) | (i2&i3&i5&i6&i7&!io15) | (i2&i3&i4
+    &i5&i6&!io16) | (i2&i3&i4&i5&i7&!io16) | (i2&i3&i4&i6&i7&!io16) | (
+    i2&i3&i5&i6&i7&!io16) | (i1&i2&i3&i4&i5&i6) | (i1&i2&i3&i4&i5&i7) | (
+    i1&i2&i3&i4&i6&i7) | (i1&i2&i3&i5&i6&i7) | (i3&i4&i5&i6&i7&!i8&i9) | (
+    i2&i4&i5&i6&i7&!i8&i9) | (i3&i4&i5&i6&i7&!i8&i11) | (i2&i4&i5&i6&i7
+    &!i8&i11) | (i3&i4&i5&i6&i7&!io15) | (i2&i4&i5&i6&i7&!io15) | (i3&i4
+    &i5&i6&i7&!io16) | (i2&i4&i5&i6&i7&!io16) | (i1&i3&i4&i5&i6&i7) | (
+    i1&i2&i4&i5&i6&i7) | (i2&i3&i4&i5&i6&i7);
+
+o12 = (!i3) | (!i2) | (!i7) | (!i6) | (!i5) | (!i4);
+
+io18 = (!i1&i8&i11&io16&io15&!io14&!io13) | (!i1&i8&i11&io16&io15&io14
+    &io13) | (!i1&!i8&!i9&!i11&io16&io15) | (!i1&i8&i9&!i11&io16&io15) | (
+    !i1&i8&!i9&i11&io16&io15);
+
+o19oe = ;
+
+o12oe = ;
+
+io18oe = ;
+
