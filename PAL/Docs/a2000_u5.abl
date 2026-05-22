@@ -1,0 +1,59 @@
+MODULE A2000_U5
+
+TITLE 'PAL buffer control for A2000 (U5) for production PCB Commodore BSW'
+
+DECLARATIONS
+SLV1 	PIN 1;
+SLV2 	PIN 2;
+SLV3	PIN 3;
+SLV4 	PIN 4;
+SLV5 	PIN 5;
+OVR 	PIN 6;
+RD 	PIN 7;
+BAS 	PIN 8; 
+RESET 	PIN 9;
+A23 	PIN 10; 
+A22 	PIN 11; 
+A21 	PIN 13; 
+A20 	PIN 14; 
+D2P 	PIN 15; 
+A19 	PIN 16; 
+BERR 	PIN 17; 
+OWN 	PIN 18; 
+DS	PIN 19; 
+NCOLLIS	PIN 20; 
+PROC 	PIN 21; 
+DBOE 	PIN 22; 
+ASQ 	PIN 23; 
+
+EQUATIONS
+
+!NCOLLIS =		SLV1&	SLV2&	SLV3&	SLV4&	SLV5
+	 #	PROC&		SLV2&	SLV3&	SLV4&	SLV5
+	 #	PROC&	SLV1&		SLV3&	SLV4&	SLV5
+	 #	PROC&	SLV1&	SLV2&		SLV4&	SLV5
+	 #	PROC&	SLV1&	SLV2&	SLV3&		SLV5
+	 #	PROC&	SLV1&	SLV2&	SLV3&	SLV4;
+		 
+!PROC	=	!BAS&!A23&!A22&!A21&		RESET&OVR
+	#	!BAS& A23&!A22& A21&		RESET&OVR
+	#	!BAS& A23& A22&!A21&		RESET&OVR
+	#	!BAS& A23& A22& A21&!A20&!A19&	RESET&OVR
+	#	!BAS& A23& A22& A21& A20& A19&	RESET&OVR;
+
+!D2P	=	OWN&!SLV1&RD						"Downstream reads upstream slave
+	#	OWN&!SLV2&RD						""
+	#	OWN&!SLV3&RD						""
+	#	OWN&!SLV4&RD						""
+	#	OWN&!SLV5&RD						""
+	#	!OWN&SLV1&SLV2&SLV3&SLV4&SLV5&!RD;			"Upstream writes downstream sl
+
+!DBOE	= 	!BAS&!RD	&BERR&OWN				"CPU reads from slave
+	# 	!DS&RD&!ASQ	&BERR&OWN				"CPU writes to slave
+	# 	!BAS&!RD	&BERR&!OWN&SLV1&SLV2&SLV3&SLV4&SLV5	"DMA reads CPU RAM
+	# 	!DS&RD&!ASQ	&BERR&!OWN&SLV1&SLV2&SLV3&SLV4&SLV5;	"DMA writes to CPU RAM
+
+
+
+END
+

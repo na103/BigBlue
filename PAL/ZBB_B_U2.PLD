@@ -1,0 +1,61 @@
+Name     ZBB_B_U2 ;
+PartNo   00 ;
+Date     15/05/2026 ;
+Revision 01 ;
+Designer Nicola Avanzi ;
+Company  Retrocampus ;
+Assembly None ;
+Location  ;
+Device    g16v8a ;
+
+
+/****************************************************************/
+/*  Reverse engineering HARDITAL ZORRO BIG BLUE PAL U2          */
+/*  Collision detect on board B                                 */
+/*                                                              */
+/*  Pins 2, 3, 4 are hardwired to Vcc on this revision. They    */
+/*  acted as enable qualifiers in the original PAL equations    */
+/*  and as additional NCOLLIS contributors.                     */
+/*                                                              */
+/*  Pin 19 (SLVOUT) is tied to GND on the PCB. The replacement  */
+/*  drives it permanently LOW to avoid output stage contention. */
+/*                                                              */
+/*  Pin 18 (PROC) is NC. We replicate the original logic        */
+/*  anyway, for documentation and probe-debugging purposes.     */
+/****************************************************************/
+
+
+/* *************** INPUT PINS *********************/
+PIN  1  = BAS                     ; /* AS BUS                          */
+PIN  2  = ENA1                    ; /* tied to Vcc on this revision    */
+PIN  3  = ENA2                    ; /* tied to Vcc on this revision    */
+PIN  4  = ENA3                    ; /* tied to Vcc on this revision    */ 
+PIN  5  = SLV2                    ; /* SLAVE BUS Z2                    */ 
+PIN  6  = SLV1                    ; /* SLAVE BUS Z1                    */ 
+PIN  7  = SLV0                    ; /* SLAVE BUS Z0                    */ 
+PIN  8  = A23                     ; /*                                 */ 
+PIN  9  = A22                     ; /*                                 */ 
+PIN 11  = A21                     ; /*                                 */ 
+PIN 13  = A20                     ; /*                                 */ 
+PIN 14  = A19                     ; /*                                 */ 
+PIN 15  = OVR                     ; /*                                 */ 
+PIN 16  = RST                     ; /* 68000 Reset                           */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 12  = NCOLLIS                 ; /*                                 */
+PIN 17  = PROC                    ; /*                                 */
+PIN 19  = SLVOUT                  ; /*                                 */
+
+!NCOLLIS = !ENA1 # !ENA2 # !ENA3 # !SLV0 # !SLV1 # !SLV2;
+NCOLLIS.OE = 'b'1;
+
+!PROC = !BAS & !A23 & !A22 & !A21 & RST & OVR
+      # !BAS & A23 & !A22 & A21 & RST & OVR
+      # !BAS & A23 & A22 & !A21 & RST & OVR
+      # !BAS & A23 & A21 & !A20 & !A19 & RST & OVR
+      # !BAS & A23 & A21 & A20 & A19 & RST & OVR;
+PROC.OE = 'b'1;
+
+!SLVOUT = 'b'1;
+SLVOUT.OE = 'b'1;
+

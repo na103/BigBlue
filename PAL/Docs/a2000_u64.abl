@@ -1,0 +1,64 @@
+MODULE A2000_U64
+
+TITLE 'PAL aribitrate for A2000 (U64) for production-PCB Commodore BSW'
+
+DECLARATIONS
+SEVENM	PIN 1;
+BAS	PIN 2;
+RES	PIN 3;
+BGIN	PIN 4;
+BR5	PIN 5;
+BR4	PIN 6;
+BR3	PIN 7;
+BR2	PIN 8;
+BR1	PIN 9;
+OE	PIN 11;
+BASD	PIN 12;
+BGOLD	PIN 13 ISTYPE 'reg';
+BG5	PIN 14 ISTYPE 'reg';
+BG4	PIN 15 ISTYPE 'reg';
+BG3	PIN 16 ISTYPE 'reg';
+BG2	PIN 17 ISTYPE 'reg';
+BG1	PIN 18 ISTYPE 'reg';
+BR	PIN 19;
+
+EQUATIONS
+
+BG1.CLK = SEVENM;
+BG2.CLK = SEVENM;
+BG3.CLK = SEVENM;
+BG4.CLK = SEVENM;
+BG5.CLK	= SEVENM;
+BGOLD.CLK = SEVENM; 
+
+BG1.OE = !OE;
+BG2.OE = !OE;
+BG3.OE = !OE;
+BG4.OE = !OE;
+BG5.OE = !OE;
+BGOLD.OE = !OE; 
+
+
+!BG1 	:= RES & !BGIN & BGOLD & !BR1	"Generate BG1
+	# RES & !BGIN & !BG1;		"hold until !BG
+
+!BG2 	:= RES & !BGIN & BGOLD & !BR2 & BR1 
+	# RES & !BGIN & !BG2;		
+
+!BG3 	:= RES & !BGIN & BGOLD & !BR3 & BR2 & BR1
+	# RES & !BGIN & !BG3;		
+
+!BG4 	:= RES & !BGIN & BGOLD & !BR4 & BR3 & BR2 & BR1
+	# RES & !BGIN & !BG4;		
+
+!BG5 	:= RES & !BGIN & BGOLD & !BR5 & BR4 & BR3 & BR2 & BR1
+	# RES & !BGIN & !BG5;
+
+!BGOLD	:= !BGIN;				"Store old state og BG
+
+!BR	= RES & (!BR5 # !BR4 # !BR3# !BR2 # !BR1); " BR is request to 68K
+
+!BASD	= BAS;
+
+END
+

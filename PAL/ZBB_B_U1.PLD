@@ -1,0 +1,64 @@
+Name     ZBB_B_U1 ;
+PartNo   00 ;
+Date     14/05/2026 ;
+Revision 01 ;
+Designer Nicola Avanzi ;
+Company  Retrocampus ;
+Assembly None ;
+Location  ;
+Device   g16v8a ;
+
+
+/****************************************************************/
+/*                                                              */
+/*  Reverse engineering HARDITAL ZORRO BIG BLUE GAL logic U1    */
+/*  zorro II bus arbitration                                    */
+/*                                                              */
+/*                                                              */
+/*  Note: this revision has I7-9 (pin 7-9) tied to VCC.         */
+/*  Some original equations have been simplified accordingly.   */
+/****************************************************************/
+
+/* *************** INPUT PINS *********************/
+PIN  1 = CLK                     ; /* 7 Mhz clock                     */ 
+PIN  2 = BR0                     ; /* BUS Request Zorro 0             */ 
+PIN  3 = RES                     ; /* BUS Reset                       */ 
+PIN  4 = BG                      ; /* Cpu BUS grant                   */ 
+PIN  5 = BR1                     ; /* BUS Request Zorro 1             */ 
+PIN  6 = BR2                     ; /* BUS Request Zorro 2             */
+PIN  7 = I7                      ; /* tied to VCC                     */
+PIN  8 = I8                      ; /* tied to VCC                     */
+PIN  9 = I9                      ; /* tied to VCC                     */
+PIN 11 = !OE                     ; /* Output Enable, active low       */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 12 = BG0                     ; /* BUS grant Zorro 0               */ 
+PIN 13 = BGOLD                   ; /* Old state BG                    */ 
+PIN 14 = BG1                     ; /* BUS grant Zorro 1               */ 
+PIN 15 = BG2                     ; /* BUS grant Zorro 2               */ 
+PIN 19 = BR                      ; /* Cpu BUS request                 */
+
+/* Generate BG0..BG3 then hold until !BG releases */
+
+/*
+!BG0.D = RES & !BG & BGOLD & !BR0     
+       # RES & !BG & !BG0;
+*/
+/* slot 0 is slave-only by design */
+
+!BG0.D = 'b'1;
+
+!BG1.D = RES & !BG & BGOLD & !BR1 & BR0
+       # RES & !BG & !BG1;
+
+!BG2.D = RES & !BG & BGOLD & !BR2 & BR1 & BR0
+       # RES & !BG & !BG2;
+
+/* Store old state of BG */
+!BGOLD.D = !BG & I7 & I8 & I9;
+
+
+/* BR = bus request to 68000 */
+!BR = RES & I7 & I8 & I9 & (!BR2 # !BR1 # !BR0);
+
+

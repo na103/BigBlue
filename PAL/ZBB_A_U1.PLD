@@ -1,0 +1,107 @@
+Name     ZBB_A_U1 ;
+PartNo   00 ;
+Date     15/05/2026 ;
+Revision 01 ;
+Designer Nicola Avanzi ;
+Company  Retrocampus ;
+Assembly None ;
+Location  ;
+Device   g16v8a ;
+
+
+/****************************************************************/
+/*                                                              */
+/*  Reverse engineering HARDITAL ZORRO BIG BLUE GAL logic U1    */
+/*  steering                                                    */
+/*                                                              */
+/*  Note: this revision has SLVOUT (pin 5) tied to GND and      */
+/*  pin 9 tied to VCC                                           */
+/*  Some original equations have been simplified accordingly.   */
+/****************************************************************/
+
+
+/* *************** INPUT PINS *********************/
+PIN  1  =  NCOLLIS                ; /*  Collision detect from board B        */ 
+PIN  2  =  RW                     ; /*  68000 R/W                            */ 
+PIN  3  =  ASQ                    ; /*  AS delayed                           */
+PIN  4  =  ASQ90                  ; /*  AS clkd on low edge of 7M            */ 
+PIN  5  =  SLVOUT                 ; /*  BUS slave out (tied to GND)          */ 
+PIN  6  =  CBG                    ; /*  BUS grant                            */ 
+PIN  7  =  AS                     ; /*  68000 Address Strobe                 */ 
+PIN  8  =  BGACK                  ; /*  BUS grant acknowledge                */ 
+PIN 11  =  OWN                    ; /*  local own                            */ 
+PIN 13  =  UDS                    ; /*  68000 Upper Data Strobe              */ 
+PIN 16  =  LDS                    ; /*  68000 Lower Data Strobe              */
+PIN 18  =  BURST                  ; /*  68000 Reset                          */ 
+
+/* *************** OUTPUT PINS *********************/
+PIN 12  =  AOE                    ; /* Address output enable (not connected) */
+PIN 14  =  BERR                   ; /* Bus error                             */ 
+PIN 15  =  DMAOUT                 ; /* DMA out (buffered copy of OWN)        */
+PIN 17  =  DBOE                   ; /* Data buffer output enable             */
+PIN 19  =  D2P                    ; /* Data to processor (direction)         */ 
+
+/* AOE: low during any bus activity. Pin not connected on PCB. */
+
+!AOE  = !BGACK #
+        CBG & OWN #
+        !AS #
+        !ASQ90;
+AOE.OE = 'b'1;
+
+/* BERR: always inactive. Original PAL went tri-state when neither
+   RST nor SLVOUT were asserted, allowing external sources to assert
+   BERR via wire-OR. With SLVOUT tied to GND, the original OE was 
+   always true, so the PAL always actively drove BERR HIGH anyway.
+   We replicate this behavior with push-pull driving.
+
+BERR.OE = !BURST #
+          !SLVOUT;
+
+*/
+
+!BERR = 'b'0;
+BERR.OE = 'b'1;
+
+/* DMAOUT: buffered mirror of OWN 
+
+!DMAOUT = !OWN #
+		!i9;
+DMOUT.OE = 'b'1;
+
+*/
+
+!DMAOUT =  !OWN;
+DMAOUT.OE = 'b'1;
+
+
+/* DBOE: active during valid data transfers. The original GAL went
+   tri-state outside cycles; we replicate by always driving HIGH 
+   (push-pull) since the line has no other drivers.
+   Simplified form (SLVOUT=GND eliminates !BURST-dependent terms).
+
+!DBOE = 'b'1;
+DBOE.OE = RW & !ASQ & !BURST & !LDS #
+          RW & !ASQ & !SLVOUT & !LDS #
+          RW & !ASQ & !BURST & !UDS #
+          RW & !ASQ & !SLVOUT & !UDS #           
+         !RW & !AS & !BURST #
+         !RW & !AS & !SLVOUT;
+*/
+
+!DBOE = RW & !ASQ & !LDS #
+        RW & !ASQ & !UDS # 
+        !RW & !AS;
+DBOE.OE = 'b'1;
+
+/* D2P: data transceiver direction. Asserted (toward processor) when:
+   - write from another master (someone else writing into us), or
+   - read with NCOLLIS active (board B won, redirect data inward) */
+
+
+!D2P = !NCOLLIS & RW #
+       !OWN & !RW;
+D2P.OE = 'b'1;       
+
+
+
